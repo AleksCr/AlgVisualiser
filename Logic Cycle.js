@@ -56,7 +56,7 @@ function colorProducion(pos, color, newPos) {
     ctx.fillRect(newPos*15,500,10,-arr[newPos].rnd*50);
 }
 
-var alg = "stupidSort";
+var alg = "bubbleSort";
 init_gen();
 arrtest2();
 alert(strtest);
@@ -97,6 +97,38 @@ function visualising(alg) {
             }, 500);
         }
         //myLoop();
+    } else if(alg == "bubbleSort"){
+        var i = 0;
+        var remain = arr.length;
+        myLoop();
+        function myLoop () {
+            setTimeout(function () {
+                i++;
+                if (i < remain) {
+                    colorProducion(i-1,"orange",i-1);
+                    colorProducion(i,"orange",i);
+                    if(arr[i-1].rnd > arr[i].rnd){
+                        var tmp = arr[i-1].rnd;
+                        arr[i-1].rnd = arr[i].rnd;
+                        arr[i].rnd = tmp;
+                        colorProducion(i-1,"pink",i-1);
+                        colorProducion(i,"pink",i);
+                        myLoop();
+                    }
+                    else {setTimeout(function () {
+                        colorProducion(i-1,"pink",i-1);
+                        colorProducion(i,"pink",i);
+                    },500);
+                        myLoop();}
+                } else {
+                    remain--;
+                    i=0;
+                    if(remain<1) return;
+                    myLoop();
+                }
+            }, 500);
+        }
     }
+
 }
 setTimeout(function() {visualising(alg)}, 500);
