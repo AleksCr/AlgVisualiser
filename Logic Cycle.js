@@ -80,17 +80,11 @@ function visualising(alg) {
                     colorProducion(i-1,"orange",i-1);
                     colorProducion(i,"orange",i);
                     if(arr[i-1].rnd > arr[i].rnd){
-                        setTimeout(function () {
-                            colorProducion(i-1,"pink",i-1);
-                            colorProducion(i,"pink",i);
-                        },500);
-                        colorProducion(i-1,"green",i-1);
-                        colorProducion(i,"green",i);
                         var tmp = arr[i-1].rnd;
                         arr[i-1].rnd = arr[i].rnd;
                         arr[i].rnd = tmp;
-                        colorProducion(i-1,"green",i-1);
-                        colorProducion(i,"green",i);
+                        colorProducion(i-1,"pink",i-1);
+                        colorProducion(i,"pink",i);
                         i=0;
                         myLoop();
                     }
