@@ -56,7 +56,8 @@ function colorProducion(pos, color, newPos) {
     ctx.fillRect(newPos*15,500,10,-arr[newPos].rnd*50);
 }
 
-var alg = "bubbleSort";
+var alg;
+alg = prompt("choose alg in list '|stupidSort|bubbleSort|sheikerSort|' ");//"bubbleSort";
 init_gen();
 arrtest2();
 alert(strtest);
@@ -128,7 +129,72 @@ function visualising(alg) {
                 }
             }, 500);
         }
-    }
+    } else if(alg == "sheikerSort") {
+        var i = 0;
+        var rightBorder = arr.length;
+        var leftBorder = 0;
+        var dir = "right";
+        myLoop();
 
-}
+        function myLoop() {
+            setTimeout(function () {
+                if(dir == "right"){
+                    i++;
+                    if (i < rightBorder) {
+                        colorProducion(i - 1, "orange", i - 1);
+                        colorProducion(i, "orange", i);
+                        if (arr[i - 1].rnd > arr[i].rnd) {
+                            var tmp = arr[i - 1].rnd;
+                            arr[i - 1].rnd = arr[i].rnd;
+                            arr[i].rnd = tmp;
+                            colorProducion(i - 1, "pink", i - 1);
+                            colorProducion(i, "pink", i);
+                            myLoop();
+                        }
+                        else {
+                            setTimeout(function () {
+                                colorProducion(i - 1, "pink", i - 1);
+                                colorProducion(i, "pink", i);
+                            }, 500);
+                            myLoop();
+                        }
+                    } else {
+                        dir = "left";
+                        rightBorder--;
+                        //i = 0;
+                        if (rightBorder-leftBorder <= 2) return;
+                        myLoop();
+                    }
+                } else if(dir == "left") {
+                    i--;
+                    if (i > leftBorder) {
+                        colorProducion(i - 1, "orange", i - 1);
+                        colorProducion(i, "orange", i);
+                        if (arr[i - 1].rnd > arr[i].rnd) {
+                            var tmp = arr[i - 1].rnd;
+                            arr[i - 1].rnd = arr[i].rnd;
+                            arr[i].rnd = tmp;
+                            colorProducion(i - 1, "pink", i - 1);
+                            colorProducion(i, "pink", i);
+                            myLoop();
+                        }
+                        else {
+                            setTimeout(function () {
+                                colorProducion(i - 1, "pink", i - 1);
+                                colorProducion(i, "pink", i);
+                            }, 500);
+                            myLoop();
+                        }
+                    } else {
+                        dir = "right";
+                        leftBorder++;
+                        //i = 0;
+                        if (rightBorder-leftBorder <= 2) return;
+                        myLoop();
+                    }
+                }
+                }, 500);
+
+         }
+    }}
 setTimeout(function() {visualising(alg)}, 500);
